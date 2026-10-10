@@ -3,8 +3,10 @@ package dz.irrigationdz
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -20,8 +23,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.WaterDrop
+import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -45,6 +50,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -52,12 +58,14 @@ import androidx.compose.ui.unit.dp
 import androidx.core.os.LocaleListCompat
 import dz.irrigationdz.data.Agronomy
 import dz.irrigationdz.data.ParcelEntity
+import dz.irrigationdz.ui.IrrigationDzTheme
 import kotlinx.coroutines.launch
 import java.util.Locale
 import kotlin.math.roundToInt
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         val repo = (application as IrrigationApp).repository
         setContent { IrrigationDzApp(repo) }
@@ -131,7 +139,7 @@ fun stageLabel(stage: Agronomy.GrowthStage): String = stringResource(
 @Composable
 fun IrrigationDzApp(repo: dz.irrigationdz.data.ParcelRepository) {
     var tab by remember { mutableStateOf(0) }
-    MaterialTheme {
+    IrrigationDzTheme {
         Scaffold(
             topBar = {
                 TopAppBar(
@@ -153,19 +161,19 @@ fun IrrigationDzApp(repo: dz.irrigationdz.data.ParcelRepository) {
                         selected = tab == 0,
                         onClick = { tab = 0 },
                         label = { Text(stringResource(R.string.tab_dose)) },
-                        icon = {}
+                        icon = { Icon(Icons.Default.WaterDrop, stringResource(R.string.tab_dose)) }
                     )
                     NavigationBarItem(
                         selected = tab == 1,
                         onClick = { tab = 1 },
                         label = { Text(stringResource(R.string.tab_parcels)) },
-                        icon = {}
+                        icon = { Icon(Icons.Default.List, stringResource(R.string.tab_parcels)) }
                     )
                     NavigationBarItem(
                         selected = tab == 2,
                         onClick = { tab = 2 },
                         label = { Text(stringResource(R.string.tab_plan)) },
-                        icon = {}
+                        icon = { Icon(Icons.Default.CalendarMonth, stringResource(R.string.tab_plan)) }
                     )
                 }
             }
@@ -303,10 +311,29 @@ fun computeFromFields(f: FieldInputs): Agronomy.DoseResult? {
 fun DoseScreen() {
     val f = rememberFields()
     val dose = computeFromFields(f)
-    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp)) {
-        InputForm(f)
-        Spacer(Modifier.height(12.dp))
-        if (dose != null) DoseCard(dose) else Text("—")
+    // Adaptive: side-by-side form + result on tablets / landscape (≥840dp),
+    // single column on phones. Content capped at 840dp and centered.
+    BoxWithConstraints(Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
+        val wide = maxWidth >= 840.dp
+        if (wide) {
+            Row(
+                Modifier.widthIn(max = 1200.dp).padding(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Column(Modifier.weight(1f)) { InputForm(f) }
+                Column(Modifier.weight(1f)) {
+                    if (dose != null) DoseCard(dose) else Text("—")
+                }
+            }
+        } else {
+            Column(
+                Modifier.widthIn(max = 840.dp).verticalScroll(rememberScrollState()).padding(16.dp)
+            ) {
+                InputForm(f)
+                Spacer(Modifier.height(12.dp))
+                if (dose != null) DoseCard(dose) else Text("—")
+            }
+        }
     }
 }
 
@@ -341,9 +368,13 @@ fun ParcelsScreen(repo: dz.irrigationdz.data.ParcelRepository) {
     var toDelete by remember { mutableStateOf<ParcelEntity?>(null) }
 
     Scaffold(floatingActionButton = {
-        FloatingActionButton(onClick = { showEditor = true }) { Icon(Icons.Default.Add, null) }
+        FloatingActionButton(onClick = { showEditor = true }) {
+            Icon(Icons.Default.Add, stringResource(R.string.add_parcel))
+        }
     }) { padding ->
-        Column(Modifier.fillMaxSize().padding(padding).padding(16.dp)) {
+        Column(
+            Modifier.fillMaxSize().padding(padding).padding(16.dp).widthIn(max = 840.dp)
+        ) {
             if (parcels.isEmpty()) {
                 Text(stringResource(R.string.no_parcels))
             } else {
@@ -443,7 +474,10 @@ fun ParcelEditor(onDismiss: () -> Unit, onSave: (ParcelEntity) -> Unit) {
 @Composable
 fun PlanScreen(repo: dz.irrigationdz.data.ParcelRepository) {
     val parcels by repo.observeAll().collectAsState(initial = emptyList())
-    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp)) {
+    Column(
+        Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp)
+            .widthIn(max = 840.dp)
+    ) {
         if (parcels.isEmpty()) {
             Text(stringResource(R.string.no_parcels))
         } else {
