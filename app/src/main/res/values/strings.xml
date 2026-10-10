@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">IrrigationDZ</string>
+    <string name="tab_dose">Dose</string>
+    <string name="tab_parcels">Parcelles</string>
+    <string name="tab_plan">Planning</string>
+
+    <string name="crop">Culture</string>
+    <string name="soil">Sol</string>
+    <string name="method">Irrigation</string>
+    <string name="zone">Zone climatique</string>
+    <string name="stage">Stade de croissance</string>
+    <string name="area_ha">Surface (ha)</string>
+    <string name="flow_ls">Débit (L/s)</string>
+    <string name="eto_custom">ETo personnalisé (mm/jour, vide = preset)</string>
+    <string name="rain_mm">Pluie efficace (mm)</string>
+
+    <string name="result_etc">Besoin (ETc)</string>
+    <string name="result_interval">Fréquence conseillée</string>
+    <string name="result_net">Dose nette</string>
+    <string name="result_gross">Dose brute</string>
+    <string name="result_volume">Volume par arrosage</string>
+    <string name="result_duration">Durée d\'arrosage</string>
+    <string name="result_season">Besoin saisonnier net (ordre de grandeur)</string>
+    <string name="days_unit">jours</string>
+    <string name="mm_day">mm/jour</string>
+    <string name="disclaimer">Estimation de terrain (FAO). À ajuster avec un technicien local.</string>
+
+    <string name="add_parcel">Ajouter une parcelle</string>
+    <string name="parcel_name">Nom de la parcelle</string>
+    <string name="save">Enregistrer</string>
+    <string name="cancel">Annuler</string>
+    <string name="delete">Supprimer</string>
+    <string name="no_parcels">Aucune parcelle. Ajoutez votre premier champ.</string>
+    <string name="confirm_delete">Supprimer cette parcelle ?</string>
+    <string name="next_waterings">Prochains arrosages</string>
+    <string name="today">Aujourd\'hui</string>
+    <string name="in_x_days">Dans %1$d j</string>
+    <string name="lang">عربية</string>
+
+    <string name="crop_wheat">Blé</string>
+    <string name="crop_potato">Pomme de terre</string>
+    <string name="crop_tomato">Tomate</string>
+    <string name="crop_onion">Oignon</string>
+    <string name="crop_maize">Maïs</string>
+    <string name="crop_melon">Melon / Pastèque</string>
+    <string name="crop_pepper">Poivron</string>
+    <string name="crop_palm">Palmier dattier</string>
+    <string name="crop_citrus">Agrumes</string>
+    <string name="crop_olive">Olivier</string>
+
+    <string name="soil_sandy">Sableux</string>
+    <string name="soil_sandy_loam">Sablo-limoneux</string>
+    <string name="soil_loam">Limoneux</string>
+    <string name="soil_clay">Argileux</string>
+
+    <string name="method_drip">Goutte-à-goutte</string>
+    <string name="method_sprinkler">Aspersion</string>
+    <string name="method_surface">Gravitaire</string>
+
+    <string name="zone_littoral">Littoral</string>
+    <string name="zone_hauts_plateaux">Hauts Plateaux</string>
+    <string name="zone_steppe">Steppe</string>
+    <string name="zone_sahara">Sahara</string>
+
+    <string name="stage_initial">Initial</string>
+    <string name="stage_development">Développement</string>
+    <string name="stage_mid">Mi-saison</string>
+    <string name="stage_late">Fin de cycle</string>
+</resources>

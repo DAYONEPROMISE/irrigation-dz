@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">IrrigationDZ</string>
+    <string name="tab_dose">الجرعة</string>
+    <string name="tab_parcels">القطع</string>
+    <string name="tab_plan">البرنامج</string>
+
+    <string name="crop">المحصول</string>
+    <string name="soil">التربة</string>
+    <string name="method">السقي</string>
+    <string name="zone">المنطقة المناخية</string>
+    <string name="stage">مرحلة النمو</string>
+    <string name="area_ha">المساحة (هكتار)</string>
+    <string name="flow_ls">التدفق (لتر/ثانية)</string>
+    <string name="eto_custom">ETo مخصص (مم/يوم، فارغ = القيمة الجاهزة)</string>
+    <string name="rain_mm">المطر الفعال (مم)</string>
+
+    <string name="result_etc">الاحتياج (ETc)</string>
+    <string name="result_interval">التكرار الموصى به</string>
+    <string name="result_net">الجرعة الصافية</string>
+    <string name="result_gross">الجرعة الإجمالية</string>
+    <string name="result_volume">الحجم لكل سقية</string>
+    <string name="result_duration">مدة السقي</string>
+    <string name="result_season">الاحتياج الموسمي الصافي (تقدير تقريبي)</string>
+    <string name="days_unit">أيام</string>
+    <string name="mm_day">مم/يوم</string>
+    <string name="disclaimer">تقدير ميداني (FAO). يُضبط مع تقني محلي.</string>
+
+    <string name="add_parcel">إضافة قطعة</string>
+    <string name="parcel_name">اسم القطعة</string>
+    <string name="save">حفظ</string>
+    <string name="cancel">إلغاء</string>
+    <string name="delete">حذف</string>
+    <string name="no_parcels">لا توجد قطع. أضف حقلك الأول.</string>
+    <string name="confirm_delete">حذف هذه القطعة؟</string>
+    <string name="next_waterings">السقيات القادمة</string>
+    <string name="today">اليوم</string>
+    <string name="in_x_days">بعد %1$d أيام</string>
+    <string name="lang">Français</string>
+
+    <string name="crop_wheat">قمح</string>
+    <string name="crop_potato">بطاطس</string>
+    <string name="crop_tomato">طماطم</string>
+    <string name="crop_onion">بصل</string>
+    <string name="crop_maize">ذرة</string>
+    <string name="crop_melon">بطيخ / دلاع</string>
+    <string name="crop_pepper">فلفل</string>
+    <string name="crop_palm">نخيل التمر</string>
+    <string name="crop_citrus">حمضيات</string>
+    <string name="crop_olive">زيتون</string>
+
+    <string name="soil_sandy">رملية</string>
+    <string name="soil_sandy_loam">رملية طميية</string>
+    <string name="soil_loam">طميية</string>
+    <string name="soil_clay">طينية</string>
+
+    <string name="method_drip">تقطير</string>
+    <string name="method_sprinkler">رش</string>
+    <string name="method_surface">غمر</string>
+
+    <string name="zone_littoral">الساحل</string>
+    <string name="zone_hauts_plateaux">الهضاب العليا</string>
+    <string name="zone_steppe">السهوب</string>
+    <string name="zone_sahara">الصحراء</string>
+
+    <string name="stage_initial">البداية</string>
+    <string name="stage_development">النمو</string>
+    <string name="stage_mid">منتصف الموسم</string>
+    <string name="stage_late">نهاية الدورة</string>
+</resources>
